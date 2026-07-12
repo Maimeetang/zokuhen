@@ -1,14 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AnimeDetail } from "@/utils/schema";
+import { generateSlug } from "@/utils/slugify";
 
 export default function AnimeCard({ details }: { details: AnimeDetail }) {
-  const imageSrc = details.main_picture?.medium;
+  const imageSrc = details.main_picture?.large;
+  const slug = generateSlug(details.title);
+  const genres = details.genres?.slice(0, 2) ?? [];
 
   return (
     <Link
       className="group m-3 flex h-72 overflow-hidden rounded-md bg-white shadow duration-300 ease-in-out hover:scale-[1.04] hover:shadow-lg active:scale-[0.99]"
-      href={`/anime/${details.id}`}
+      href={`/anime/${details.id}/${slug}`}
     >
       <div className="relative h-full aspect-2/3 shrink-0 overflow-hidden bg-gray-200">
         {imageSrc ? (
@@ -33,16 +36,18 @@ export default function AnimeCard({ details }: { details: AnimeDetail }) {
             {details.synopsis}
           </p>
         </article>
-        <div className="flex flex-nowrap gap-1 overflow-hidden bg-gray-200 p-2">
-          {details.genres.slice(0, 2).map((genre) => (
-            <div
-              key={genre.id}
-              className="max-w-[48%] shrink truncate rounded-2xl bg-yellow-100 px-3 py-1 text-xs font-bold text-yellow-700"
-            >
-              {genre.name}
-            </div>
-          ))}
-        </div>
+        {genres.length > 0 ? (
+          <div className="flex flex-nowrap gap-1 overflow-hidden bg-gray-200 p-2">
+            {genres.map((genre) => (
+              <div
+                key={genre.id}
+                className="max-w-[48%] shrink truncate rounded-2xl bg-yellow-100 px-3 py-1 text-xs font-bold text-yellow-700"
+              >
+                {genre.name}
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
     </Link>
   );

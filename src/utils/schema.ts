@@ -15,7 +15,7 @@ export const animeDetailSchema = z.object({
   title: z.string(),
   main_picture: mainPictureSchema.optional(),
   synopsis: z.string().optional(),
-  genres: z.array(genreSchema),
+  genres: z.array(genreSchema).optional(),
 });
 
 const rankingSchema = z.object({

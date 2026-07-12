@@ -38,7 +38,7 @@ export default async function AnimeList({
       : `${base_url}/anime/ranking?ranking_type=all&limit=${limit}&offset=${currentOffset}&fields=${fields}`;
 
     const res = await fetch(url, {
-      next: { revalidate: query ? 60 : 86400 },
+      next: { revalidate: 86400 },
       headers: { "X-MAL-CLIENT-ID": clientId },
     });
 
@@ -75,11 +75,11 @@ export default async function AnimeList({
         <div className={listContainerClass}>
           <h1 className={headerClass}>{headerText}</h1>
           <AnimeListPagination paging={paging} />
-          <div className="my-3 grid w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+          <ul className="my-3 grid w-full grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {animelist.map((item) => (
               <AnimeCard key={item.node.id} details={item.node} />
             ))}
-          </div>
+          </ul>
           <AnimeListPagination paging={paging} />
         </div>
       </div>
