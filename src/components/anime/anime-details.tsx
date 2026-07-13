@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getMalApiBaseUrl, getMalClientId } from "@/utils/env";
 import { animeDetailSchema } from "@/utils/schema";
-import { AnimeError } from "@/components/browse/anime-list-error";
+import { AnimeError } from "@/components/anime-error";
 import HareshiButton from "./hareshi-button";
 import MALButton from "./mal-button";
 import { Suspense } from "react";

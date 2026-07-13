@@ -1,7 +1,7 @@
 import { getMalApiBaseUrl, getMalClientId } from "@/utils/env";
 import { animeListResponseSchema } from "@/utils/schema";
 import AnimeCard from "./anime-card";
-import { AnimeError } from "./anime-list-error";
+import { AnimeError } from "../anime-error";
 import AnimeListPagination from "./anime-list-pagination";
 
 export default async function AnimeList({
