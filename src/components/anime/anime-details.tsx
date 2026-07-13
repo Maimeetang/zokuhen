@@ -93,7 +93,7 @@ export default async function AnimeDetails({ id }: { id: string }) {
               {animeInfo.title}
             </h1>
             <br />
-            <p className="line-clamp-10 text-justify text-sm text-gray-500 hidden md:block">
+            <p className="line-clamp-10 text-justify text-sm text-gray-500 max-md:hidden">
               {animeInfo.synopsis}
             </p>
             <br className="hidden lg:block" />
