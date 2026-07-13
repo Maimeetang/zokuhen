@@ -10,12 +10,33 @@ const genreSchema = z.object({
   name: z.string(),
 });
 
+const studioSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});
+
+const videoSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  url: z.url(),
+  created_at: z.number(),
+  updated_at: z.number(),
+});
+
 export const animeDetailSchema = z.object({
   id: z.number(),
   title: z.string(),
   main_picture: mainPictureSchema.optional(),
   synopsis: z.string().optional(),
   genres: z.array(genreSchema).optional(),
+  media_type: z.string().optional(),
+  num_episodes: z.number().optional(),
+  status: z.string().optional(),
+  start_date: z.string().optional(), // "2023-09-29"
+  end_date: z.string().optional(),
+  studios: z.array(studioSchema).optional(),
+  source: z.string().optional(),
+  videos: z.array(videoSchema).optional(),
 });
 
 const rankingSchema = z.object({
