@@ -42,3 +42,15 @@ export type AnimeListItem = z.infer<typeof animeListItemSchema>;
 export type AnimeListResponse = z.infer<typeof animeListResponseSchema>;
 
 export type Paging = z.infer<typeof pagingSchema>;
+
+export const anilistMediaResponseSchema = z.object({
+  data: z.object({
+    Media: z
+      .object({
+        id: z.number(),
+      })
+      .nullable(),
+  }),
+});
+
+export type AnilistMediaResponse = z.infer<typeof anilistMediaResponseSchema>;

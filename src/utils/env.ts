@@ -13,3 +13,11 @@ export function getMalApiBaseUrl(): string {
   }
   return apiBaseUrl;
 }
+
+export function getAnilistApiBaseUrl(): string {
+  const apiBaseUrl = process.env.ANILIST_API_BASE_URL;
+  if (!apiBaseUrl) {
+    throw new Error("ANILIST_API_BASE_URL is not set");
+  }
+  return apiBaseUrl;
+}
