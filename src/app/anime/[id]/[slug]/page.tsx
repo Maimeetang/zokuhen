@@ -1,4 +1,5 @@
 import AnimeOverview from "@/components/anime/overview/anime-overview";
+import AnimeOverviewSkeleton from "@/components/anime/overview/anime-overview-skeleton";
 import { Suspense } from "react";
 
 export default async function AnimeOverviewPage({
@@ -9,8 +10,8 @@ export default async function AnimeOverviewPage({
   const { id } = await params;
 
   return (
-    <div className="mx-auto w-full md:max-w-5xl xl:max-w-7xl">
-      <Suspense fallback={<div className="text-gray-400">loading...</div>}>
+    <div className="mx-auto w-full px-4 md:max-w-5xl xl:max-w-7xl">
+      <Suspense fallback={<AnimeOverviewSkeleton />}>
         <AnimeOverview id={id} />
       </Suspense>
     </div>

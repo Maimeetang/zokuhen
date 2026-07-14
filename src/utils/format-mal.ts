@@ -45,3 +45,8 @@ export function getYoutubeEmbedUrl(url: string) {
   const match = url.match(/(?:youtu\.be\/|v=)([^&?/]+)/);
   return match ? `https://www.youtube.com/embed/${match[1]}` : null;
 }
+
+export function getNumEpisodes(numEpisodes?: AnimeDetail["num_episodes"]) {
+  if (!numEpisodes) return "Unknown";
+  return numEpisodes.toString();
+}

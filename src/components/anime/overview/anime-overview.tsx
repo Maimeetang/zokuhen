@@ -5,6 +5,7 @@ import {
   formatSource,
   formatStatus,
   getLatestVideo,
+  getNumEpisodes,
   getYoutubeEmbedUrl,
 } from "@/utils/format-mal";
 import { animeDetailSchema } from "@/utils/schema";
@@ -42,6 +43,7 @@ export default async function AnimeOverview({ id }: { id: string }) {
   }
 
   const anime = result.data;
+  const numEpisodes = getNumEpisodes(anime.num_episodes);
   const latestVideo = getLatestVideo(anime.videos);
   const embedUrl = latestVideo ? getYoutubeEmbedUrl(latestVideo.url) : null;
   const studios = anime.studios?.map((s) => s.name).join(", ");
@@ -65,10 +67,10 @@ export default async function AnimeOverview({ id }: { id: string }) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+    <div className="grid grid-cols-1 md:grid-cols-3 space-y-4 md:gap-4 md:space-y-0">
       <div className="space-y-4 rounded-md bg-white p-5 shadow">
         <DetailRow label="Type" value={formatMediaType(anime.media_type)} />
-        <DetailRow label="Episodes" value={anime.num_episodes?.toString()} />
+        <DetailRow label="Episodes" value={numEpisodes} />
         <DetailRow label="Status" value={formatStatus(anime.status)} />
         <DetailRow
           label="Aired"
