@@ -17,17 +17,21 @@ export default function AnimeDetailsNav({ id, slug }: Props) {
   const isRelations =
     pathname === relationsHref || pathname.startsWith(`${relationsHref}/`);
 
-  const linkClass = (active: boolean) =>
-    `text-gray-500 hover:underline ${active ? "underline" : ""}`;
+  const tabClass = (active: boolean) =>
+    `flex-1 rounded-md px-4 py-2 text-center text-sm font-medium transition duration-300 ${
+      active ? "bg-gray-800 text-white" : "text-gray-500 hover:bg-gray-100"
+    }`;
 
   return (
-    <div className="flex w-full justify-center space-x-4 p-4">
-      <Link href={overviewHref} className={linkClass(isOverview)}>
-        overview
-      </Link>
-      <Link href={relationsHref} className={linkClass(isRelations)}>
-        relation
-      </Link>
+    <div className="flex w-full justify-center p-4">
+      <div className="flex w-full max-w-md rounded-md bg-gray-200 p-1">
+        <Link href={overviewHref} className={tabClass(isOverview)}>
+          overview
+        </Link>
+        <Link href={relationsHref} className={tabClass(isRelations)}>
+          relation
+        </Link>
+      </div>
     </div>
   );
 }
