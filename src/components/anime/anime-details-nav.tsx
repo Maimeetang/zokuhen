@@ -25,10 +25,18 @@ export default function AnimeDetailsNav({ id, slug }: Props) {
   return (
     <div className="flex w-full justify-center p-4">
       <div className="flex w-full max-w-md rounded-md bg-gray-200 p-1">
-        <Link href={overviewHref} className={tabClass(isOverview)}>
+        <Link
+          href={overviewHref}
+          replace={true}
+          className={tabClass(isOverview)}
+        >
           overview
         </Link>
-        <Link href={relationsHref} className={tabClass(isRelations)}>
+        <Link
+          href={relationsHref}
+          replace={true}
+          className={tabClass(isRelations)}
+        >
           relation
         </Link>
       </div>
