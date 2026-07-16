@@ -75,3 +75,38 @@ export const anilistMediaResponseSchema = z.object({
 });
 
 export type AnilistMediaResponse = z.infer<typeof anilistMediaResponseSchema>;
+
+export const relatedAnimeItemSchema = z.object({
+  node: animeDetailSchema.pick({
+    id: true,
+    title: true,
+    main_picture: true,
+  }),
+  relation_type: z.enum([
+    "adaptation",
+    "prequel",
+    "sequel",
+    "parent_story",
+    "side_story",
+    "character",
+    "summary",
+    "alternative_version",
+    "spin_off",
+    "other",
+    "alternative_setting",
+    "full_story",
+  ]),
+  relation_type_formatted: z.string(),
+});
+
+export const animeWithRelationsResponseSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  main_picture: mainPictureSchema.optional(),
+  related_anime: z.array(relatedAnimeItemSchema),
+});
+
+export type RelatedAnimeItem = z.infer<typeof relatedAnimeItemSchema>;
+export type AnimeWithRelationsResponse = z.infer<
+  typeof animeWithRelationsResponseSchema
+>;

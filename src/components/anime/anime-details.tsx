@@ -71,10 +71,10 @@ export default async function AnimeDetails({ id }: { id: string }) {
   const imageSrc = animeInfo.main_picture?.large;
 
   return (
-    <div className="bg-white p-10">
+    <div className="bg-white p-5">
       <div className="mx-auto w-full md:max-w-5xl xl:max-w-7xl">
         <article className="mx-auto flex w-6/7 flex-col space-y-5 md:w-full md:flex-row md:items-start md:space-x-5 md:space-y-0">
-          <div className="relative mx-auto aspect-2/3 w-full shrink-0 overflow-hidden bg-gray-200 md:mx-5 md:h-96 md:w-auto">
+          <div className="relative mx-auto aspect-2/3 w-full shrink-0 overflow-hidden bg-gray-200 md:mx-5 md:h-80 md:w-auto">
             {imageSrc ? (
               <Image
                 src={imageSrc}
@@ -88,7 +88,7 @@ export default async function AnimeDetails({ id }: { id: string }) {
               <div className="flex h-full w-full items-center justify-center text-xs text-gray-400"></div>
             )}
           </div>
-          <article className="flex w-full flex-col md:min-h-96 md:flex-1">
+          <article className="flex w-full flex-col md:min-h-80 md:flex-1">
             <h1 className="text-gray-500 text-md font-medium">
               {animeInfo.title}
             </h1>
