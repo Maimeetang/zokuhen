@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 
 const sans = Noto_Sans_Thai({
@@ -23,7 +24,8 @@ export default function RootLayout({
     <html lang="th" className={`${sans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Navbar />
-        {children}
+        <main className="flex flex-1 flex-col">{children}</main>
+        <Footer />
       </body>
     </html>
   );
