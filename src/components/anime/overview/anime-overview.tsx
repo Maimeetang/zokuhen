@@ -1,4 +1,3 @@
-import { getMalApiBaseUrl, getMalClientId } from "@/utils/env";
 import {
   formatAired,
   formatMediaType,
@@ -8,37 +7,17 @@ import {
   getNumEpisodes,
   getYoutubeEmbedUrl,
 } from "@/utils/format-mal";
-import { animeDetailSchema } from "@/utils/schema";
+import { getAnimeById } from "@/utils/mal";
 
 export default async function AnimeOverview({ id }: { id: string }) {
-  const clientId = getMalClientId();
-  const base_url = getMalApiBaseUrl();
+  const result = await getAnimeById(id);
 
-  const fields =
-    "media_type,num_episodes,status,start_date,end_date,studios,source,genres,videos";
-  const url = `${base_url}/anime/${id}?fields=${fields}`;
-
-  let res: Response;
-  try {
-    res = await fetch(url, {
-      next: { revalidate: 86400 },
-      headers: { "X-MAL-CLIENT-ID": clientId },
-    });
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-
-  if (!res.ok) {
-    console.error(`External API error: ${res.status}`);
-    return null;
-  }
-
-  const json = await res.json();
-  const result = animeDetailSchema.safeParse(json);
-
-  if (!result.success) {
-    console.error(JSON.stringify(result.error.issues));
+  if (!result.ok) {
+    console.error(
+      "status" in result
+        ? `External API error: ${result.status}`
+        : `External API error: ${result.error}`,
+    );
     return null;
   }
 

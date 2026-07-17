@@ -99,6 +99,10 @@ export const relatedAnimeItemSchema = z.object({
   relation_type_formatted: z.string(),
 });
 
+export const animeFullSchema = animeDetailSchema.extend({
+  related_anime: z.array(relatedAnimeItemSchema).optional(),
+});
+
 export const animeWithRelationsResponseSchema = z.object({
   id: z.number(),
   title: z.string(),
@@ -107,6 +111,7 @@ export const animeWithRelationsResponseSchema = z.object({
 });
 
 export type RelatedAnimeItem = z.infer<typeof relatedAnimeItemSchema>;
+export type AnimeFull = z.infer<typeof animeFullSchema>;
 export type AnimeWithRelationsResponse = z.infer<
   typeof animeWithRelationsResponseSchema
 >;

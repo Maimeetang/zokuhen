@@ -1,38 +1,37 @@
-import { getMalApiBaseUrl, getMalClientId } from "@/utils/env";
-import { animeWithRelationsResponseSchema } from "@/utils/schema";
+import { getAnimeById } from "@/utils/mal";
 import AnimeRelationsFlow from "./anime-relations-flow";
 
-export default async function AnimeRelations({ id }: { id: number }) {
-  const clientId = getMalClientId();
-  const base_url = getMalApiBaseUrl();
+export default async function AnimeRelations({
+  id,
+  height,
+}: {
+  id: string;
+  height: number;
+}) {
+  const result = await getAnimeById(id);
 
-  let res: Response;
-  try {
-    res = await fetch(`${base_url}/anime/${id}?fields=related_anime`, {
-      next: { revalidate: 86400 },
-      headers: { "X-MAL-CLIENT-ID": clientId },
-    });
-  } catch (error) {
-    console.error(error);
+  if (!result.ok) {
+    console.error(
+      "status" in result
+        ? `External API error: ${result.status}`
+        : `External API error: ${result.error}`,
+    );
     return null;
   }
 
-  if (!res.ok) {
-    console.error(`External API error: ${res.status}`);
-    return null;
-  }
-
-  const json = await res.json();
-  const result = animeWithRelationsResponseSchema.safeParse(json);
-
-  if (!result.success) {
-    console.error(JSON.stringify(result.error.issues));
-    return null;
-  }
+  const anime = result.data;
 
   return (
     <div id="anime-relations" className="py-5">
-      <AnimeRelationsFlow animeWithRelations={result.data} />
+      <AnimeRelationsFlow
+        animeWithRelations={{
+          id: anime.id,
+          title: anime.title,
+          main_picture: anime.main_picture,
+          related_anime: anime.related_anime ?? [],
+        }}
+        height={height}
+      />
     </div>
   );
 }

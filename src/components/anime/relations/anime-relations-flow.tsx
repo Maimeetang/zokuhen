@@ -23,8 +23,10 @@ import mapRelationsToReactFlow from "@/utils/react-flow";
 
 export default function AnimeRelationFlow({
   animeWithRelations,
+  height,
 }: {
   animeWithRelations: AnimeWithRelationsResponse;
+  height: number;
 }) {
   const nodeTypes = {
     animeRelationsNode: AnimeRelationsNode,
@@ -43,9 +45,7 @@ export default function AnimeRelationFlow({
   }, [animeWithRelations.id]);
 
   const fitViewOptions: FitViewOptions = {
-    // nodes: [{ id: animeWithRelations.id.toString() }],
-    minZoom: 1,
-    maxZoom: 1,
+    minZoom: 0.8,
     padding: 0.5,
   };
 
@@ -72,7 +72,7 @@ export default function AnimeRelationFlow({
 
   return (
     <div
-      style={{ width: "100%", height: "90vh" }}
+      style={{ width: "100%", height: `${height}vh` }}
       className="bg-white shadow rounded-md"
     >
       <ReactFlow

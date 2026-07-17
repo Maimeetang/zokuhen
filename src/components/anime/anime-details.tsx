@@ -1,66 +1,24 @@
 import Image from "next/image";
-import { getMalApiBaseUrl, getMalClientId } from "@/utils/env";
-import { animeDetailSchema } from "@/utils/schema";
 import { AnimeError } from "@/components/anime-error";
+import { getAnimeById } from "@/utils/mal";
 import HareshiButton from "./hareshi-button";
 import MALButton from "./mal-button";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
 export default async function AnimeDetails({ id }: { id: string }) {
-  const clientId = getMalClientId();
-  const base_url = getMalApiBaseUrl();
+  const result = await getAnimeById(id);
 
-  const fields = "synopsis,genres";
-  const url = `${base_url}/anime/${id}?fields=${fields}`;
-
-  let res: Response;
-  try {
-    res = await fetch(url, {
-      next: { revalidate: 86400 },
-      headers: { "X-MAL-CLIENT-ID": clientId },
-    });
-  } catch (error) {
-    console.error(error);
-    return (
-      <div className="bg-white p-10">
-        <AnimeError />
-      </div>
-    );
-  }
-
-  if (res.status === 404) {
-    notFound();
-  }
-
-  if (!res.ok) {
-    console.error(`External API error: ${res.status}`);
-    return (
-      <div className="bg-white p-10">
-        <AnimeError />
-      </div>
-    );
-  }
-
-  let animeInfo;
-  try {
-    const json = await res.json();
-    const result = animeDetailSchema.safeParse(json);
-
-    if (!result.success) {
-      console.error(
-        `Invalid External API response: ${JSON.stringify(result.error.issues)}`,
-      );
-      return (
-        <div className="bg-white p-10">
-          <AnimeError />
-        </div>
-      );
+  if (!result.ok) {
+    if ("status" in result && result.status === 404) {
+      notFound();
     }
 
-    animeInfo = result.data;
-  } catch (error) {
-    console.error(error);
+    console.error(
+      "status" in result
+        ? `External API error: ${result.status}`
+        : `External API error: ${result.error}`,
+    );
     return (
       <div className="bg-white p-10">
         <AnimeError />
@@ -68,6 +26,7 @@ export default async function AnimeDetails({ id }: { id: string }) {
     );
   }
 
+  const animeInfo = result.data;
   const imageSrc = animeInfo.main_picture?.large;
 
   return (

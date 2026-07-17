@@ -16,8 +16,8 @@ export default async function AnimePageLayout({
     <section>
       <Suspense fallback={<AnimeDetailsSkeleton />}>
         <AnimeDetails id={id} />
-        <AnimeDetailsNav id={id} slug={slug} />
       </Suspense>
+      <AnimeDetailsNav id={id} slug={slug} />
       {children}
     </section>
   );

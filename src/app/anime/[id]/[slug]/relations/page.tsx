@@ -5,13 +5,13 @@ import { Suspense } from "react";
 export default async function AnimeRelationsPage({
   params,
 }: {
-  params: Promise<{ id: number }>;
+  params: Promise<{ id: string; slug: string }>;
 }) {
   const { id } = await params;
   return (
-    <div className="mx-auto w-full px-5 md:px-20">
+    <div className="mx-auto w-full px-4 md:max-w-5xl xl:max-w-7xl">
       <Suspense fallback={<AnimeRelationsSkeleton />}>
-        <AnimeRelations id={id} />
+        <AnimeRelations id={id} height={70} />
       </Suspense>
     </div>
   );
