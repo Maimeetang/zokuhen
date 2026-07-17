@@ -3,10 +3,12 @@ import AnimeRelationsFlow from "./anime-relations-flow";
 
 export default async function AnimeRelations({
   id,
+  scrollIntoView,
   height,
 }: {
   id: string;
-  height: number;
+  scrollIntoView?: boolean;
+  height?: number;
 }) {
   const result = await getAnimeById(id);
 
@@ -31,6 +33,7 @@ export default async function AnimeRelations({
           related_anime: anime.related_anime ?? [],
         }}
         height={height}
+        scrollIntoView={scrollIntoView}
       />
     </div>
   );

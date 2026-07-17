@@ -14,7 +14,6 @@ import {
   type OnNodeDrag,
   type DefaultEdgeOptions,
   Controls,
-  MiniMap,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import AnimeRelationsNode from "./anime-relations-node";
@@ -23,10 +22,12 @@ import mapRelationsToReactFlow from "@/utils/react-flow";
 
 export default function AnimeRelationFlow({
   animeWithRelations,
-  height,
+  height = 90,
+  scrollIntoView = true,
 }: {
   animeWithRelations: AnimeWithRelationsResponse;
-  height: number;
+  scrollIntoView?: boolean;
+  height?: number;
 }) {
   const nodeTypes = {
     animeRelationsNode: AnimeRelationsNode,
@@ -38,6 +39,8 @@ export default function AnimeRelationFlow({
   );
 
   useEffect(() => {
+    if (!scrollIntoView) return;
+
     document.getElementById("anime-relations")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -45,7 +48,9 @@ export default function AnimeRelationFlow({
   }, [animeWithRelations.id]);
 
   const fitViewOptions: FitViewOptions = {
-    minZoom: 0.8,
+    nodes: [{ id: animeWithRelations.id.toString() }],
+    maxZoom: 1,
+    minZoom: 0.7,
     padding: 0.5,
   };
 
@@ -91,7 +96,6 @@ export default function AnimeRelationFlow({
       >
         <Background />
         <Controls />
-        <MiniMap />
       </ReactFlow>
     </div>
   );
