@@ -12,21 +12,15 @@ export default async function AnimeList({
   currentOffset: number;
 }) {
   try {
+    query = query.replaceAll(" ", "-");
+
     const headerText = query ? "ผลการค้นหาที่ใกล้เคียงที่สุด" : "Top Anime";
     const listContainerClass = "w-full md:max-w-5xl xl:max-w-7xl";
     const headerClass = "m-3 my-10 text-2xl font-medium text-gray-500";
 
-    if (query.length < 3 && query.length != 0)
-      return (
-        <div className="flex w-full flex-col items-center">
-          <div className={listContainerClass}>
-            <h1 className={headerClass}>{headerText}</h1>
-            <div className="flex min-h-[60vh] w-full items-center justify-center">
-              <p className="text-gray-500">ไม่พบข้อมูล</p>
-            </div>
-          </div>
-        </div>
-      );
+    if (query.length < 3 && query.length != 0) {
+      query = query.padEnd(3, "-");
+    }
 
     const clientId = getMalClientId();
     const base_url = getMalApiBaseUrl();
