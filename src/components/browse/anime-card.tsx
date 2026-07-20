@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { AnimeDetail } from "@/utils/schema";
@@ -10,8 +12,9 @@ export default function AnimeCard({ details }: { details: AnimeDetail }) {
 
   return (
     <Link
-      className="group m-3 flex h-72 overflow-hidden rounded-md bg-white shadow duration-300 ease-in-out hover:scale-[1.04] hover:shadow-lg active:scale-[0.99]"
+      className="group m-3 flex h-72 overflow-hidden rounded-md bg-white shadow transition hover:-translate-y-1 hover:scale-105"
       href={`/anime/${details.id}/${slug}`}
+      onNavigate={() => window.document.scrollingElement?.scrollTo(0, 0)}
     >
       <div className="relative h-full aspect-2/3 shrink-0 overflow-hidden bg-gray-200">
         {imageSrc ? (

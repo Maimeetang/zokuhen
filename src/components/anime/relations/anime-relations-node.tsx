@@ -29,7 +29,7 @@ export default function AnimeRelationsNode({ data }: NodeProps<AnimeNode>) {
   return (
     <div
       className={[
-        "relative w-[180px] overflow-hidden rounded bg-white text-black shadow-sm cursor-pointer transition hover:-translate-y-1 hover:scale-105",
+        "relative w-45 overflow-hidden rounded bg-white text-black shadow-sm cursor-pointer transition hover:-translate-y-1 hover:scale-105",
         isMainNode
           ? "border-2 border-green-500 ring-2 ring-green-200"
           : "border border-slate-200",
