@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "ไม่พบหน้า",
+  description: "ไม่พบอนิเมะที่คุณค้นหา",
+};
 
 export default function NotFound() {
   return (

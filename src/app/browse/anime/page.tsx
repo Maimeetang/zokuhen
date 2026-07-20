@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import AnimeList from "@/components/browse/anime-list";
 import AnimeListSkeleton from "@/components/browse/anime-list-skeleton";
 import Search from "@/components/search";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "ค้นหาอนิเมะ",
+  description: "ค้นหาอนิเมะด้วยชื่ออังกฤษ โรมันจิ หรือภาษาญี่ปุ่น",
+};
 
 export default async function BrowseAnimePage(props: {
   searchParams?: Promise<{

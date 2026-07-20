@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import AnimeRelations from "@/components/anime/relations/anime-relations";
 import AnimeRelationsCarousel from "@/components/anime/relations/anime-relations-carousel";
 import AnimeRelationsSkeleton from "@/components/anime/relations/anime-relations-skeleton";
 import Link from "next/link";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "หน้าหลัก",
+  description: "ค้นหาภาคต่ออนิเมะได้ง่ายๆ ที่ Zokuhen",
+};
 
 const features = [
   {
