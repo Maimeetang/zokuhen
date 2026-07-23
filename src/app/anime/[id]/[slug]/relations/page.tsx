@@ -3,6 +3,7 @@ import AnimeRelations from "@/components/anime/relations/anime-relations";
 import AnimeRelationsSkeleton from "@/components/anime/relations/anime-relations-skeleton";
 import { getAnimeById } from "@/utils/mal";
 import { Suspense } from "react";
+import ScrollToTop from "@/utils/scroll-to-top";
 
 export async function generateMetadata({
   params,
@@ -32,6 +33,7 @@ export default async function AnimeRelationsPage({
   const { id } = await params;
   return (
     <div className="mx-auto w-full px-4 md:max-w-5xl xl:max-w-7xl">
+      <ScrollToTop />
       <Suspense fallback={<AnimeRelationsSkeleton />}>
         <AnimeRelations id={id} height={70} />
       </Suspense>

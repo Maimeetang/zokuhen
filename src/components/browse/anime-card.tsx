@@ -14,7 +14,6 @@ export default function AnimeCard({ details }: { details: AnimeDetail }) {
     <Link
       className="group m-3 flex h-72 overflow-hidden rounded-md bg-white shadow transition hover:-translate-y-1 hover:scale-105"
       href={`/anime/${details.id}/${slug}`}
-      onNavigate={() => window.document.scrollingElement?.scrollTo(0, 0)}
     >
       <div className="relative h-full aspect-2/3 shrink-0 overflow-hidden bg-gray-200">
         {imageSrc ? (
